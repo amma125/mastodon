@@ -54,9 +54,8 @@ class Trends::Links < Trends::Base
                   !(original_status.account.silenced? || status.account.silenced?) &&
                   !(original_status.spoiler_text? || original_status.sensitive?)
 
-    original_status.preview_cards.each do |preview_card|
-      add(preview_card, status.account_id, at_time) if preview_card.appropriate_for_trends?
-    end
+    preview_card = original_status.preview_card
+    add(preview_card, status.account_id, at_time) if preview_card&.appropriate_for_trends?
   end
 
   def add(preview_card, account_id, at_time = Time.now.utc)

@@ -69,7 +69,7 @@ namespace :tests do
         exit(1)
       end
 
-      unless Status.find(12).preview_cards.pluck(:url) == ['https://joinmastodon.org/']
+      unless Status.find(12).preview_card&.url == 'https://joinmastodon.org/'
         puts 'Preview cards not deduplicated as expected'
         exit(1)
       end
